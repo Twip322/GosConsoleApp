@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include "TicketExample.cpp"
 using namespace std;
 /// <summary>
 /// Структура данных имеющая поля
@@ -138,7 +139,7 @@ struct SingleList
 	{
 		Node* pTemp = first;
 		Node* pTempPrev;
-		if (length == 0)
+		if (length() == 0)
 		{
 			return;
 		}
@@ -268,7 +269,7 @@ struct TwoList
 	void insert_middle(string _val)
 	{
 		NodeTwo* pTemp = first;
-		if (length == 0)
+		if (length() == 0)
 		{
 			return;
 		}
@@ -278,8 +279,8 @@ struct TwoList
 			pTemp = pTemp->next;
 		}
 		NodeTwo* p = new NodeTwo(_val);
-		pTemp->previos->next = p;
 		p->previos = pTemp->previos;
+		pTemp->previos->next = p;
 		p->next = pTemp;
 		pTemp->previos = p;
 	}
@@ -293,11 +294,20 @@ struct TwoList
 /// </returns>
 int main()
 {
-	TwoList list;
-	cout << list.is_empty() << endl;
-	list.push_back("1");
-	list.push_back("2");
-	list.push_back("3");
+	setlocale(LC_ALL, "rus");
+	RegistrationForm form;
+	form.Number = 123;
+	form.Surname = "Эгов";
+	form.Name = "Евгений";
+	form.Partonimyc = "Николаевич";
+	TwoListExample list;
+	list.push_back(form);
+	form.Name = "Женя";
+	list.push_back(form);
+	form.Name = "Женек";
+	list.push_back(form);
+	form.Name = "Брух";
+	list.insert_middle(form);
 	list.print();
 	return 0;
 }
